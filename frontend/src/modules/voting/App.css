@@ -1,12 +1,6 @@
 /* ---- Base (Bright theme with modern tokens) ---- */
 :root {
-  /* Font defaults */
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: light;
-
-  /* Bright theme tokens */
+  /* Bright theme tokens (used by voting module components) */
   --bg: #2aa3f4;
   --bg-secondary: #a0d5ff;
   --bg-tertiary: #b2e0c4;
@@ -22,26 +16,6 @@
   --border-light: #e2e8f0;
 }
 
-/* Links */
-a {
-  font-weight: 600;
-  color: var(--accent);
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-a:hover { opacity: 0.8; }
-
-/* Reset and base styles */
-html, body, #root { height: 100%; }
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #2aa3f4 0%, #a0d5ff 35%, #b2e0c4 100%);
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 /* Headings */
 h1 { 

@@ -1,16 +1,11 @@
-/* App.css - Redesigned to match Login theme */
-/* Reset and base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* App.css - Admin layout theme */
 
 .app {
   min-height: 100vh;
   background: linear-gradient(135deg, #2aa3f4 0%, #a0d5ff 35%, #b2e0c4 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 
 /* Header Styles - Bright Theme */
 .app-header {

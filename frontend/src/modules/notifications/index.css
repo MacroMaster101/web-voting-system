@@ -1,6 +1,3 @@
-/* Minimal reset; keep page styles in each page's CSS */
-* { box-sizing: border-box; }
-html, body, #root { height: 100%; }
-body { margin: 0; background: #f6f8fb; color: #0f172a; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-a { color: inherit; text-decoration: none; }
-button { font-family: inherit; }
+/* notifications/index.css — intentionally empty.
+   Global reset lives in src/index.css.
+   Notification theme is set by App.css and page-level CSS. */
