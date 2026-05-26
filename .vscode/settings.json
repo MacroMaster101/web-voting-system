@@ -1,0 +1,9 @@
+{
+  "java.autobuild.enabled": false,
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.import.gradle.enabled": false,
+  "java.import.maven.enabled": true,
+  "java.project.sourcePaths": [],
+  "java.project.outputPath": "backend/target/classes"
+}

@@ -1,0 +1,64 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: votingsystem
+  
+  # --- H2 Database ---
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:h2:file:../data/testdb;DB_CLOSE_ON_EXIT=FALSE}
+    driverClassName: org.h2.Driver
+    username: ${SPRING_DATASOURCE_USERNAME:sa}
+    password: ${SPRING_DATASOURCE_PASSWORD:1234}
+  
+  # --- JPA & Hibernate ---
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+  # --- H2 Console ---
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  # --- Multipart File Uploads ---
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  # --- SMTP Mail Configuration ---
+  mail:
+    host: ${SPRING_MAIL_HOST:smtp.gmail.com}
+    port: ${SPRING_MAIL_PORT:587}
+    username: ${SPRING_MAIL_USERNAME:}
+    password: ${SPRING_MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    default-encoding: UTF-8
+
+# --- Logging Configuration ---
+logging:
+  level:
+    com.example.votingsystem: INFO
+    org.hibernate.SQL: OFF
+    org.hibernate.orm.jdbc.bind: OFF
+    org.hibernate.type.descriptor.sql.BasicBinder: OFF
+
+# --- Application JWT Config ---
+app:
+  jwt:
+    secret: ${APP_JWT_SECRET:ChangeThisToAVeryLongRandomStringChangeThis!!}
+  mail:
+    from-address: ${APP_MAIL_FROM_ADDRESS:no-reply@example.com}
+    from-name: ${APP_MAIL_FROM_NAME:The Bright Future Student Awards Voting Portal}
