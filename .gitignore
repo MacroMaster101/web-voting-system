@@ -58,8 +58,7 @@ Thumbs.db
 desktop.ini
 
 # ── IDEs and editors ─────────────────────────
-.vscode/*
-!.vscode/settings.json
+.vscode/
 .idea/
 *.iws
 *.iml
