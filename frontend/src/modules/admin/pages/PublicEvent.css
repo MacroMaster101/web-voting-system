@@ -1,4 +1,4 @@
-/* ===== Modern Public Event Page - Redesigned ===== */
+/* Public event page */
 
 /* Reset & Base */
 *,
@@ -231,7 +231,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
-/* ===== Modern Event Header Card (Landing Style - Centered) ===== */
+/* Event header card */
 .pe-header-card {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(16px);
@@ -533,7 +533,7 @@
   box-shadow: 0 12px 32px rgba(59, 130, 246, 0.2);
 }
 
-/* ===== Enhanced Photo Styling ===== */
+/* Photo styling */
 .pe-nom-imgwrap {
   position: relative;
   width: 100%;
@@ -726,11 +726,29 @@
 
   .vh__topbar-inner {
     padding: 0 1rem;
-    height: 4rem;
+    height: auto;
+    min-height: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 
   .vh__topbar.scrolled .vh__topbar-inner {
-    height: 3.5rem;
+    height: auto;
+    min-height: 3.5rem;
+  }
+
+  .vh__brand {
+    min-width: 0;
+    flex: 1 1 220px;
+  }
+
+  .vh__actions {
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
   }
 
   .pe-header-card {
@@ -747,6 +765,10 @@
 
   .vh__brand-text {
     font-size: 1.15rem;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .vh__topbar.scrolled .vh__brand-text {
@@ -758,6 +780,10 @@
   }
 
   .vh__btn {
+    flex: 1 1 132px;
+    justify-content: center;
+    min-width: 0;
+    white-space: nowrap;
     padding: 0.6rem 1.1rem;
     font-size: 0.75rem;
   }
@@ -803,12 +829,16 @@
 
   .vh__topbar-inner {
     padding: 0 0.75rem;
-    height: 3.5rem;
+    height: auto;
+    min-height: 3.5rem;
     gap: 1rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
   }
 
   .vh__topbar.scrolled .vh__topbar-inner {
-    height: 3rem;
+    height: auto;
+    min-height: 3rem;
   }
 
   .vh__logo {
@@ -866,7 +896,7 @@
   }
 }
 
-/* ===== Enhanced Card-like Header Effects ===== */
+/* Header card effects */
 .vh__topbar {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -923,7 +953,7 @@
   border-radius: 0.5rem;
 }
 
-/* ===== Enhanced Glass Morphism ===== */
+/* Glass surface styles */
 @supports not (backdrop-filter: blur(20px)) {
   .vh__topbar {
     background: rgba(255, 255, 255, 0.95);
@@ -946,7 +976,7 @@
   animation: pulse 2s infinite;
 }
 
-/* ===== Enhanced Hover Effects for Photos ===== */
+/* Photo hover effects */
 .pe-nom-imgwrap::before {
   content: '';
   position: absolute;

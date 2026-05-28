@@ -1,6 +1,6 @@
-# 🗄️ Local Data
+# 🗄 Local Data
 
-This folder is for local development database files.
+This folder is used by the local H2 development database.
 
 The backend defaults to:
 
@@ -8,14 +8,10 @@ The backend defaults to:
 jdbc:h2:file:../data/testdb;DB_CLOSE_ON_EXIT=FALSE
 ```
 
-## 🧠 What Lives Here
+## 📦 Contents
 
-- Generated H2 files like `testdb.mv.db`
-- Local-only votes, users, nominees, events, and result data
-- Temporary development state that should not be committed
+The local `testdb.*` files contain development data such as users, votes, nominees, events, and results. These files are ignored by Git.
 
-The generated H2 files are ignored by Git. Keep this folder if you want to preserve your local development data between backend restarts.
+## ♻️ Resetting The Database
 
-## ♻️ Fresh Database
-
-Stop the backend and remove generated `testdb.*` files. The backend will create them again on the next run.
+Stop the backend, remove the local `testdb.*` files, and start the backend again. Spring Boot will create a fresh local database on the next run.

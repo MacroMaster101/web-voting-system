@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { api, listEvents, listCategoriesByEvent } from "../api";
 import CategoryViewsPanel from "../components/CategoryViewsPanel";
 import "./Dashboard.css";
 
-/* ---- Inline SVG icons (updated to match Students/Results/Analytics pages) ---- */
+/* Icons */
 const Icon = {
     Star: (p) => (
         <svg viewBox="0 0 24 24" width="24" height="24" {...p}>
@@ -73,7 +73,7 @@ function Kpi({ title, value, icon }) {
     );
 }
 
-/* Reusable glass nav (Dashboard highlighted) */
+/* Dashboard nav */
 function GlassNav() {
     return (
         <nav className="results-top-nav" role="navigation" aria-label="Dashboard Navigation">
@@ -101,7 +101,6 @@ function GlassNav() {
                     </a>
                 </div>
 
-                {/* Back to Admin Dashboard */}
                 <a className="results-nav-back-btn" href={adminLink("/admin")}>
                     <Icon.ArrowLeft style={{ display: 'block' }} />Back to Dashboard
                 </a>
@@ -111,7 +110,7 @@ function GlassNav() {
 }
 
 export default function Dashboard() {
-    // ---- 1) Attach token to axios once; always runs, not conditional
+    // Attach token to axios once.
     useEffect(() => {
         const qs = new URLSearchParams(window.location.search);
         const t = qs.get("token");
@@ -128,7 +127,7 @@ export default function Dashboard() {
 
     const hasToken = !!token();
 
-    // ---- 2) All hooks at top-level (never conditional)
+    // Page state
     const [kpis, setKpis] = useState(null);
     const [events, setEvents] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -142,8 +141,8 @@ export default function Dashboard() {
     const [auto, setAuto] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
 
-    // ---- 3) Data loaders (functions can be referenced after declaration in effects)
-    const loadInitial = async () => {
+    // Data loaders
+    const loadInitial = useCallback(async () => {
         setErr("");
         if (!hasToken) { setLoading(false); return; }
         try {
@@ -156,7 +155,7 @@ export default function Dashboard() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [hasToken]);
 
     const refreshAll = async () => {
         if (refreshing || !hasToken) return;
@@ -185,7 +184,7 @@ export default function Dashboard() {
     };
 
     // ---- 4) Effects (guarded by hasToken, but hooks still run every render)
-    useEffect(() => { void loadInitial(); }, [hasToken]);
+    useEffect(() => { void loadInitial(); }, [loadInitial]);
 
     useEffect(() => {
         (async () => {

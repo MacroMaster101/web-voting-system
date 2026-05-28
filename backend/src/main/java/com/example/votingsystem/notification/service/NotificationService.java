@@ -123,8 +123,7 @@ public class NotificationService {
         return result;
     }
 
-    // ---------- (Optional) Backward compatibility single-recipient helpers ----------
-    // If any old code still calls these, keep them; otherwise you can remove.
+    // Backward-compatible single-recipient helpers.
     public Notification createAndSendLegacy(String recipient, String subject, String body) {
         var req = new SendEmailRequest();
         req.setRecipients(List.of(recipient));
@@ -142,7 +141,7 @@ public class NotificationService {
         return createScheduledBulk(req).get(0);
     }
 
-    // ======================== RESCHEDULE / CANCEL / RESEND ========================
+    // Reschedule, cancel, and resend
 
     // Change scheduled time (must be future)
     public Notification reschedule(Long id, Instant when) {
@@ -158,7 +157,7 @@ public class NotificationService {
         return repo.save(n);
     }
 
-    // Mark as cancelled (set FAILED with message)
+    // Mark as cancelled by storing a failed status with a clear message.
     public Notification cancel(Long id) {
         Notification n = one(id);
         if (n.getStatus() == Status.SENT) throw new IllegalStateException("Already sent.");
@@ -178,7 +177,7 @@ public class NotificationService {
         return trySend(n);
     }
 
-    // ======================== SCHEDULER BATCH ========================
+    // Scheduler batch
 
     @Transactional
     public void sendDueBatch() {
@@ -196,7 +195,7 @@ public class NotificationService {
         }
     }
 
-    // ======================== CORE SEND ========================
+    // Core send
 
     // Try to send an email; update status/attempts accordingly
     public Notification trySend(Notification n) {
@@ -231,7 +230,7 @@ public class NotificationService {
         return repo.save(n); // persist changes
     }
 
-    // ======================== LISTING / ARCHIVE / DELETE ========================
+    // Listing, archive, and delete
 
     // List all notifications (newest first)
     public List<Notification> listAllDesc() { return repo.findAllDesc(); }

@@ -1,23 +1,16 @@
-# 🔌 BrightVote Backend
+# 🔌 Bright Future Backend
 
-<p>
-  <img alt="Spring Boot" src="https://img.shields.io/badge/Spring%20Boot-3.5.4-6DB33F?style=flat-square&logo=springboot&logoColor=white" />
-  <img alt="Java" src="https://img.shields.io/badge/Java-17-ED8B00?style=flat-square&logo=openjdk&logoColor=white" />
-  <img alt="Database" src="https://img.shields.io/badge/Database-H2-2563EB?style=flat-square" />
-  <img alt="Security" src="https://img.shields.io/badge/Security-JWT-0F172A?style=flat-square" />
-</p>
+Spring Boot handles the API layer for authentication, voting, nominee management, dashboards, notifications, and result reports.
 
-Spring Boot API for authentication, voting, nominee management, dashboards, notifications, and results.
+## 🧠 Main Areas
 
-## 🧩 What It Contains
-
-- 🔐 Admin/student authentication and JWT security
+- 🔐 Admin and student authentication with JWT security
 - 🧑‍🎓 Student signup, approval, and voting
 - 🏆 Event, category, and nominee management
 - 📊 Dashboard and voting progress APIs
-- 🔔 Email notification services
-- 📄 Results, analytics, PDF, CSV, and spreadsheet exports
-- 🗄️ Local H2 database configuration
+- ✉️ Email notification services
+- 📄 Result publishing and exports
+- 🗄 Local H2 database configuration
 
 ## 🚀 Run
 
@@ -35,7 +28,13 @@ The API runs on `http://localhost:8080` by default.
 .\mvnw.cmd test
 ```
 
-## 🗄️ Database
+If your local H2 file is open in another process, run tests with an in-memory database:
+
+```powershell
+.\mvnw.cmd test "-Dspring.datasource.url=jdbc:h2:mem:votingsystem_test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
+```
+
+## 🗄 Database
 
 The default development database is H2:
 
@@ -54,9 +53,9 @@ Default local credentials:
 - User: `sa`
 - Password: `1234`
 
-## 🔐 Environment Variables
+## ⚙️ Environment Variables
 
-Use `.env.example` as a reference. Spring Boot reads real environment variables from your shell or hosting platform; the example file is documentation, not a secret store.
+Use `.env.example` as a reference. Keep real secrets in environment variables or deployment settings, not in source files.
 
 | Variable | Purpose |
 | --- | --- |
@@ -72,9 +71,7 @@ Use `.env.example` as a reference. Spring Boot reads real environment variables 
 | `APP_MAIL_FROM_ADDRESS` | Sender email address |
 | `APP_MAIL_FROM_NAME` | Sender display name |
 
-Keep real secrets in environment variables, not in source files.
-
-## 🗂️ Source Layout
+## 🗂 Source Layout
 
 ```text
 src/main/java/com/example/votingsystem/
@@ -82,7 +79,7 @@ src/main/java/com/example/votingsystem/
 |-- dashboard/
 |-- notification/
 |-- nominee/
-|-- results/
+|-- result/
 |-- student/
 `-- voting/
 ```

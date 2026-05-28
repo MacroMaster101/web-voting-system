@@ -74,7 +74,7 @@ public class SecurityConfig {
                 .authenticationProvider(authProvider)
                 .authorizeHttpRequests(reg -> reg
                         // Public/auth
-                        .requestMatchers("/api/auth/**", "/api/public/**", "/h2-console/**").permitAll()
+                        .requestMatchers("/", "/api/auth/**", "/api/public/**", "/h2-console/**").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                         // Public GETs (not the dashboard)

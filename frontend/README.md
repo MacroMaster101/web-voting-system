@@ -1,26 +1,19 @@
-# 🎨 BrightVote Frontend
+# 🌐 Bright Future Frontend
 
-<p>
-  <img alt="React" src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=0F172A" />
-  <img alt="Vite" src="https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite&logoColor=white" />
-  <img alt="Router" src="https://img.shields.io/badge/React%20Router-7-CA4245?style=flat-square&logo=reactrouter&logoColor=white" />
-  <img alt="Charts" src="https://img.shields.io/badge/Recharts-Analytics-22C55E?style=flat-square" />
-</p>
-
-Single React/Vite application for the full voting system UI.
+React/Vite powers the student, public, and admin screens for the Bright Future voting platform.
 
 ## 🧩 Modules
 
-All former frontend apps now live under one app:
+The old separate frontend apps now live inside one Vite app:
 
 ```text
 src/modules/
-|-- admin/
-|-- dashboard/
-|-- nominee/
-|-- notifications/
-|-- results/
-`-- voting/
+|-- admin/           Login, public pages, students, IT tools
+|-- dashboard/       Voting progress dashboard
+|-- nominee/         Events, categories, and nominees
+|-- notifications/   Email compose, history, and archives
+|-- results/         Result publishing, analytics, and exports
+`-- voting/          Student voting flow and vote history
 ```
 
 ## 🚀 Run
@@ -41,9 +34,9 @@ npm run lint
 npm run build
 ```
 
-## 🔐 Environment
+## ⚙️ Environment
 
-Copy `.env.example` to `.env` if you need to change frontend defaults.
+Copy `.env.example` to `.env` if local defaults need to change.
 
 ```text
 VITE_API_BASE=http://localhost:8080
@@ -61,15 +54,19 @@ VITE_REVIEW_BEFORE_SUBMIT=0
 | --- | --- |
 | `/` | Public landing page |
 | `/events` | Public event list |
+| `/e/:eventId` | Public event detail |
 | `/login` | Login and student signup |
 | `/voting` | Student voting portal |
+| `/my-vote` | Student vote dashboard |
 | `/admin` | Admin dashboard |
+| `/admin/students` | Student approval and management |
 | `/admin/nominees` | Event, category, and nominee management |
 | `/admin/notifications` | Notification center |
 | `/admin/dashboard` | Voting progress dashboard |
 | `/admin/results` | Results and reports |
 | `/admin/results/analytics` | Analytics and exports |
+| `/itc` | IT coordinator backup and restore |
 
-## 🧼 Notes
+## 🧼 Local Files
 
-Generated folders such as `node_modules/` and `dist/` are ignored and should not be committed.
+Keep local frontend files out of Git: `node_modules/`, `.env`, and `dist/`.

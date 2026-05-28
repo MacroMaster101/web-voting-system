@@ -48,7 +48,7 @@
 .nh__icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(135deg,var(--primary-1),var(--primary-2));}
 .nh__title h2{margin:0;font-size:20px;font-weight:900;}
 
-/* --- NEW pill search + segmented buttons --- */
+/* Search and segmented buttons */
 .nh__search{grid-column:1/-1;}
 .searchbar{
   display:flex; align-items:center; gap:12px; flex-wrap:wrap;

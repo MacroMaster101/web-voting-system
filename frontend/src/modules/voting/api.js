@@ -36,7 +36,7 @@ export const getCategoryResults = async (categoryId) =>
 
 // ---- Student castVote (align to singular by default; keep env override)
 export const castVote = async ({ eventId, categoryId, nomineeId }) => {
-  // If you *really* have a plural endpoint, set VITE_VOTES_PATH=/api/votes in .env
+  // Set VITE_VOTES_PATH=/api/votes if the backend exposes the plural endpoint.
   const path = import.meta.env.VITE_VOTES_PATH || "/api/vote";
   return (await api.post(path, { eventId, categoryId, nomineeId })).data;
 };

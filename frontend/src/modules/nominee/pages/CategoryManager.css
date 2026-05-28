@@ -123,7 +123,7 @@ html, body { margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-
 
 .home-container { position:relative; z-index:10; max-width:1200px; margin:0 auto; padding:32px 24px; }
 
-/* Top nav — copied from EventManager */
+/* Top nav */
 .top-nav {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(16px) saturate(180%);
@@ -364,7 +364,7 @@ html, body { margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-
 .error-text { margin: 6px 0 0; font-size: 12px; font-weight: 700; color: #b91c1c; }
 .input-invalid { border-color:#ef4444 !important; box-shadow:0 0 0 4px rgba(239,68,68,.18) !important; }
 
-/* --- Search panel & pills (copied to match Home) --- */
+/* Search panel and pills */
 .search-panel{
   background:#fff; border:1px solid var(--card-border);
   border-radius:20px; padding:20px; box-shadow: var(--shadow-lg);
@@ -390,7 +390,7 @@ html, body { margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-
   box-shadow: 0 10px 22px rgba(59,130,246,.35);
 }
 
-/* --- OPAQUE STICKY NAV + NON-STICKY PAGE HEADERS (global fix) --- */
+/* Sticky nav and page headers */
 .top-nav{
   position: sticky;
   top: 12px;                /* same offset you’re using */

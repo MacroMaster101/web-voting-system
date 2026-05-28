@@ -1,14 +1,19 @@
 import "./App.css";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useMemo, useCallback } from "react";
+import { lazy, Suspense, useMemo, useCallback } from "react";
 import AdminHome from "./pages/AdminHome.jsx";
 import Students from "./pages/Students.jsx";
 import Forgot from "./pages/Forgot.jsx";
 import Reset from "./pages/Reset.jsx";
-import DashboardApp from "../dashboard/App.jsx";
-import NomineeApp from "../nominee/App.jsx";
-import NotificationsApp from "../notifications/App.jsx";
-import ResultsApp from "../results/App.jsx";
+
+const DashboardApp = lazy(() => import("../dashboard/App.jsx"));
+const NomineeApp = lazy(() => import("../nominee/App.jsx"));
+const NotificationsApp = lazy(() => import("../notifications/App.jsx"));
+const ResultsApp = lazy(() => import("../results/App.jsx"));
+
+function AdminRouteFallback() {
+  return <div className="admin-route-fallback">Loading workspace...</div>;
+}
 
 export default function App() {
   const loc = useLocation();
@@ -53,21 +58,23 @@ export default function App() {
     <div className="app">
       <main className="app-main">
         <div className="app-main__container">
-          <Routes>
-            <Route index element={<AdminHome onLogout={handleLogout} />} />
-            <Route path="students" element={<Students onLogout={handleLogout} />} />
-            <Route path="nominees/*" element={<NomineeApp />} />
-            <Route path="notifications/*" element={<NotificationsApp />} />
-            <Route path="dashboard" element={<DashboardApp />} />
-            <Route path="results-analytics" element={<Navigate to="/admin/results/analytics" replace />} />
-            <Route path="results/*" element={<ResultsApp />} />
+          <Suspense fallback={<AdminRouteFallback />}>
+            <Routes>
+              <Route index element={<AdminHome onLogout={handleLogout} />} />
+              <Route path="students" element={<Students onLogout={handleLogout} />} />
+              <Route path="nominees/*" element={<NomineeApp />} />
+              <Route path="notifications/*" element={<NotificationsApp />} />
+              <Route path="dashboard" element={<DashboardApp />} />
+              <Route path="results-analytics" element={<Navigate to="/admin/results/analytics" replace />} />
+              <Route path="results/*" element={<ResultsApp />} />
 
-            {/* Absolute paths kept */}
-            <Route path="/forgot" element={<Forgot />} />
-            <Route path="/reset" element={<Reset />} />
+              {/* Absolute paths kept */}
+              <Route path="/forgot" element={<Forgot />} />
+              <Route path="/reset" element={<Reset />} />
 
-            <Route path="*" element={<Navigate to="." replace />} />
-          </Routes>
+              <Route path="*" element={<Navigate to="." replace />} />
+            </Routes>
+          </Suspense>
         </div>
       </main>
     </div>

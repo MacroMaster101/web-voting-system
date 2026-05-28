@@ -12,7 +12,6 @@ function pickRole(data) {
 function isAdminRole(role) { return role === "ADMIN" || role === "ROLE_ADMIN"; }
 function isOrganizerRole(role) { return role === "ORGANIZER" || role === "ROLE_ORGANIZER"; }
 function isStudentRole(role) { return role === "STUDENT" || role === "ROLE_STUDENT"; }
-/* ADDED: IT Coordinator role helper */
 function isItcRole(role) {
   return (
     role === "IT_COORDINATOR" ||
@@ -24,7 +23,7 @@ function isItcRole(role) {
 
 const VOTING_URL = import.meta.env.VITE_VOTING_URL || window.location.origin;
 
-/* ---------- Modern SVG Icons ---------- */
+/* Icons */
 const IconVote = (p) => (
   <svg viewBox="0 0 24 24" width="24" height="24" {...p}>
     <path fill="currentColor" d="M18 13h-.68l-2 2h1.91L19 17H5l1.78-2h2.05l-2-2H6l-3 3v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4l-3-3zm-1-5.05l-4.95 4.95-3.54-3.54 4.95-4.95L17 7.95zm-4.24-5.66L6.39 8.66a.996.996 0 0 0 0 1.41l11.46 11.46a.996.996 0 0 0 1.41 0l5.45-5.45a.996.996 0 0 0 0-1.41L14.16 2.29a.975.975 0 0 0-1.4-.01z"/>
@@ -177,7 +176,7 @@ export default function Login() {
       } else if (isOrganizerRole(role)) {
         localStorage.setItem("admin_auth", JSON.stringify(payload));
         nav("/admin/nominees", { replace: true });
-      } else if (isItcRole(role)) { /* ADDED: IT Coordinator branch */
+      } else if (isItcRole(role)) {
         localStorage.setItem("admin_auth", JSON.stringify(payload));
         nav("/itc", { replace: true });
       } else if (isStudentRole(role)) {
@@ -260,7 +259,7 @@ export default function Login() {
             </div>
             <div className="login-brand-text">
               <h1>Student Awards Portal</h1>
-              <p>Secure Campus Voting Platform</p>
+              <p>Secure Bright Future Voting Platform</p>
             </div>
           </div>
           
@@ -307,7 +306,7 @@ export default function Login() {
           <div className="login-mobile-header">
             <div className="login-mobile-logo">
               <IconVote />
-              <h1 className="login-mobile-title">Campus Voting</h1>
+              <h1 className="login-mobile-title">Bright Future</h1>
             </div>
             <p className="login-mobile-subtitle">Student Portal</p>
           </div>

@@ -187,10 +187,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
 .ecf .btn-reset:hover{background:#f1f5f9}
 
 /* ===================================================================== */
-/* ================  GLASSY NAVBAR (SAME AS RESULTS)  =================== */
+/* ========================= Dashboard nav ========================= */
 /* ===================================================================== */
 
-/* Sticky glass nav bar (identical look/behavior to Results nav) */
+/* Sticky glass nav bar */
 .results-top-nav {
   position: sticky;
   top: 16px;

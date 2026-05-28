@@ -85,10 +85,10 @@ public class ItcService {
         Path h2Out  = h2Dir.resolve("backup_" + ts + "_h2.zip");
 
         try (Connection c = getConn(); Statement st = c.createStatement()) {
-            // 1) Full schema+data export as SQL (what you already had)
+            // Full schema and data export as SQL.
             st.execute("SCRIPT TO '" + norm(sqlOut) + "' CHARSET 'UTF-8'");
 
-            // 2) H2 online backup to .zip (this is what was missing)
+            // H2 online backup to a zip snapshot.
             st.execute("BACKUP TO '" + norm(h2Out) + "'");
         }
 

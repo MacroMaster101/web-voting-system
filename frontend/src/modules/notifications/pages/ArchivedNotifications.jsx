@@ -96,11 +96,9 @@ export default function ArchivedNotifications() {
           </div>
 
           <div className="nav-links">
-            {/* NEW: Home tab */}
             <NavLink to="/admin/notifications" end className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}>
               <HomeIcon className="i sm" /><span className="nav-link-text">Home</span>
             </NavLink>
-            {/* Compose now at /compose */}
             <NavLink to="/admin/notifications/compose" className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}>
               <Send className="i sm" /><span className="nav-link-text">Compose</span>
             </NavLink>
@@ -127,7 +125,7 @@ export default function ArchivedNotifications() {
               <h2>Archived Notifications</h2>
             </div>
 
-            {/* right-side actions (like your current layout) */}
+            {/* Toolbar actions */}
             <div className="arch__right">
               {items.length > 0 && (
                 <>

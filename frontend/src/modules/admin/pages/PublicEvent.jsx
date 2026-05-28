@@ -4,7 +4,7 @@ import { getPublicEventBundle } from "../api.js";
 import "./PublicEvent.css";
 import PublicCategoryCharts from "./PublicCategoryCharts";
 
-/* --- Inline SVG icons --- */
+/* Icons */
 const IconArrowLeft = (props) => (
   <svg viewBox="0 0 24 24" width="20" height="20" {...props}>
     <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
@@ -36,19 +36,18 @@ const IconUser = (props) => (
   </svg>
 );
 
-/* --- Page --- */
 export default function PublicEvent() {
   const { eventId } = useParams();
   const [bundle, setBundle] = useState({ event: null, categories: [], nominees: [] });
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
 
-  // Scroll state for header effects
+  // Scroll header state
   const [navScrolled, setNavScrolled] = useState(false);
   const [navHidden, setNavHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  /* ---- Scroll Header Effect ---- */
+  /* Scroll header */
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -89,7 +88,7 @@ export default function PublicEvent() {
 
   const { event, categories, nominees } = bundle;
 
-  // nominees by category
+  // Group nominees by category.
   const nomsByCat = useMemo(() => {
     const m = new Map();
     for (const n of nominees || []) {
@@ -117,12 +116,11 @@ export default function PublicEvent() {
 
   return (
     <div className="public-event">
-      {/* === Modern Top Bar with Scroll Effects === */}
       <header className={`vh__topbar ${navScrolled ? 'scrolled' : ''} ${navHidden ? 'hidden' : ''}`}>
         <div className="vh__topbar-inner">
           <Link to="/events" className="vh__brand" aria-label="Back to Events">
             <div className="vh__logo">🎓</div>
-            <span className="vh__brand-text">University Awards</span>
+            <span className="vh__brand-text">Bright Future</span>
             <span className="vh__badge">Public Portal</span>
           </Link>
           <div className="vh__actions">
@@ -151,7 +149,6 @@ export default function PublicEvent() {
           </div>
         ) : (
           <>
-            {/* === Modern Header Card (Landing Style - Centered) === */}
             <section className="pe-header-card">
               <div className="pe-header-content">
                 <h1 className="pe-title">{event.name}</h1>
@@ -165,7 +162,7 @@ export default function PublicEvent() {
                 </div>
               </div>
 
-              {/* Metric tiles with glassmorphism */}
+              {/* Metric tiles */}
               <div className="pe-tiles">
                 <div className="pe-tile">
                   <div className="pe-tile-ico pe-tile-ico--blue">
@@ -199,7 +196,6 @@ export default function PublicEvent() {
               </div>
             </section>
 
-            {/* === Categories Section === */}
             <section>
               <div className="pe-section-hero">
                 <h2>
@@ -222,7 +218,6 @@ export default function PublicEvent() {
                     const totalVotes = sumVotes(list);
                     return (
                       <div key={cat.id} className="category-card">
-                        {/* Category Header */}
                         <div className="category-card__header">
                           <div className="category-card__title-wrapper">
                             <h2 className="category-card__title">

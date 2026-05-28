@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getMyVotes, getEventBundle, deleteMyVote } from "../api";
 import "./MyVote.css";
 
-/* ===== auth helpers (same as VotingHome) ===== */
+/* Auth helpers */
 const readAuth = () => { try { return JSON.parse(localStorage.getItem("auth") || "null"); } catch { return null; } };
 const hasToken = (a) => !!(a?.token || a?.accessToken);
 const getRole  = (a) =>
@@ -80,7 +80,7 @@ export default function MyVote() {
   }, []);
 
   // normalize /myVotes payload
-  const normalizeVotes = (data) => {
+  const normalizeVotes = useCallback((data) => {
     const arr =
       Array.isArray(data) ? data :
       Array.isArray(data?.data) ? data.data :
@@ -95,9 +95,9 @@ export default function MyVote() {
         return { eventId: evId, categoryId: catId, nomineeId: nomId };
       })
       .filter((r) => r.eventId && r.categoryId);
-  };
+  }, []);
 
-  const refetchMyVotes = async () => {
+  const refetchMyVotes = useCallback(async () => {
     try {
       const data = await getMyVotes();
       setRows(normalizeVotes(data));
@@ -105,7 +105,7 @@ export default function MyVote() {
     } catch (e) {
       setErr(e?.response?.data?.message || "Failed to load your votes.");
     }
-  };
+  }, [normalizeVotes]);
 
   // initial load
   useEffect(() => {
@@ -121,7 +121,7 @@ export default function MyVote() {
       }
     })();
     return () => { ok = false; };
-  }, []);
+  }, [normalizeVotes]);
 
   // refresh when votes change or tab is focused
   useEffect(() => {
@@ -139,7 +139,7 @@ export default function MyVote() {
       window.removeEventListener("visibilitychange", onFocus);
       window.removeEventListener("focus", onFocus);
     };
-  }, []);
+  }, [refetchMyVotes]);
 
   // fetch bundles for each event
   useEffect(() => {

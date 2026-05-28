@@ -2,14 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Landing.css";
 
-// You'll need to install lucide-react: npm install lucide-react
-// Or use your own SVG icons if you prefer
 import { Vote, Trophy, Users, TrendingUp, CheckCircle, Sparkles, Calendar } from "lucide-react";
 
-/**
- * Tries multiple likely endpoints so it works with your current Spring Boot modules.
- * You can override with VITE_API_BASE in .env if needed.
- */
+/* API base is configurable through VITE_API_BASE. */
 const BASE = import.meta?.env?.VITE_API_BASE || "http://localhost:8080";
 
 async function tryJson(url) {
@@ -44,7 +39,7 @@ export default function Landing() {
   const [navHidden, setNavHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  /* ---- Scroll Header Effect ---- */
+  /* Scroll header */
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -68,7 +63,7 @@ export default function Landing() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
-  /* ---- Toast: prefer URL (?toast=logout|login&msg=...), fallback to sessionStorage ---- */
+  /* Toast handoff from login and logout redirects */
   const [toast, setToast] = useState(null);
   
   useEffect(() => {
@@ -98,14 +93,14 @@ export default function Landing() {
     sessionStorage.removeItem("nav_toast");
   }, []);
 
-  // auto-dismiss landing toast after 3s
+  // Auto-dismiss the landing toast after a short delay.
   useEffect(() => {
     if (!toast) return;
     const id = setTimeout(() => setToast(null), 3000);
     return () => clearTimeout(id);
   }, [toast]);
 
-  // Fetch stats
+  // Fetch stats from the public API, then fall back to module endpoints.
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -225,11 +220,11 @@ export default function Landing() {
     },
   ];
 
-  // Sample events data - you can replace this with actual data from your API
+  // Static examples used by the landing page preview.
   const sampleEvents = [
     {
       id: 1,
-      title: "Annual University Awards",
+      title: "Bright Future Annual Awards",
       description: "Celebrating outstanding achievements across all faculties",
       status: "active",
       date: "2024-03-15",
@@ -279,7 +274,7 @@ export default function Landing() {
               <div className="landing__brand-icon">
                 <Vote />
               </div>
-              <span className="landing__brand-text">Campus Voting</span>
+              <span className="landing__brand-text">Bright Future</span>
             </Link>
 
             <div className="landing__nav-actions">

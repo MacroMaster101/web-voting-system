@@ -8,12 +8,12 @@ import "./Analytics.css";
 /* ---- Tiny toast system (local to this page) ---- */
 function useToasts() {
   const [toasts, setToasts] = useState([]);
-  const push = (message, type = "info") => {
+  const dismiss = useCallback((id) => setToasts((t) => t.filter((x) => x.id !== id)), []);
+  const push = useCallback((message, type = "info") => {
     const id = Math.random().toString(36).slice(2);
     setToasts((t) => [...t, { id, message, type }]);
     setTimeout(() => dismiss(id), 3200);
-  };
-  const dismiss = (id) => setToasts((t) => t.filter((x) => x.id !== id));
+  }, [dismiss]);
   return { toasts, push, dismiss };
 }
 function Toasts({ toasts, dismiss }) {
@@ -88,7 +88,7 @@ export default function Analytics() {
   const [selectTouched, setSelectTouched] = useState(false);
 
   // toasts
-  const toast = useToasts();
+  const { toasts, push: pushToast, dismiss } = useToasts();
 
   useEffect(() => {
     (async () => {
@@ -100,10 +100,10 @@ export default function Analytics() {
       } catch (e) {
         const msg = e?.response?.data?.message || e.message || "Failed to load events";
         setErr(msg);
-        toast.push(msg, "error");
+        pushToast(msg, "error");
       }
     })();
-  }, []);
+  }, [pushToast]);
 
   const onPick = async (id) => {
     setSelectTouched(true);
@@ -114,26 +114,26 @@ export default function Analytics() {
     try {
       const r = await getEventReport(id);
       setReport(r);
-      toast.push(`Loaded report for “${r?.eventName ?? "selected event"}”.`, "success");
+      pushToast(`Loaded report for “${r?.eventName ?? "selected event"}”.`, "success");
     } catch (e) {
       const msg = e?.response?.data?.message || e.message || "Failed to load report";
       setErr(msg);
-      toast.push(msg, "error");
+      pushToast(msg, "error");
     } finally {
       setLoading(false);
     }
   };
 
   const handleExportPDF = () => {
-    if (!report) { toast.push("Select an event first.", "error"); return; }
-    try { exportSimpleEventReportToPDF(report); toast.push("PDF exported.", "success"); }
-    catch { toast.push("PDF export failed.", "error"); }
+    if (!report) { pushToast("Select an event first.", "error"); return; }
+    try { exportSimpleEventReportToPDF(report); pushToast("PDF exported.", "success"); }
+    catch { pushToast("PDF export failed.", "error"); }
   };
 
   const handleExportCSV = () => {
-    if (!report) { toast.push("Select an event first.", "error"); return; }
-    try { exportEventReportToCSV(report); toast.push("CSV exported.", "success"); }
-    catch { toast.push("CSV export failed.", "error"); }
+    if (!report) { pushToast("Select an event first.", "error"); return; }
+    try { exportEventReportToCSV(report); pushToast("CSV exported.", "success"); }
+    catch { pushToast("CSV export failed.", "error"); }
   };
 
   const maxDaily = Math.max(...(report?.dailyVoteCounts || []).map(d => d.votes || 0), 1);
@@ -148,7 +148,7 @@ export default function Analytics() {
   return (
     <div className="event-results">
       <div className="bg-gradient"></div>
-      <Toasts {...toast} />
+      <Toasts toasts={toasts} dismiss={dismiss} />
 
       <div className="centered-container">
         {/* Top Navigation — scrolls with page (non-sticky) */}

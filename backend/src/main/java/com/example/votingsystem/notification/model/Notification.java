@@ -38,10 +38,10 @@ public class Notification {
     @Column(columnDefinition = "TEXT")
     private String error;
 
-    // NEW: when to send (null means "send immediately")
+    // Null means send immediately.
     private Instant scheduledFor;
 
-    // NEW: retry attempts count
+    // Retry attempts count.
     @Column(nullable=false)
     private int attempts = 0;
 

@@ -12,7 +12,6 @@ export default function NotificationHistory() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // NEW: status chip (All | Scheduled | Sent | Failed)
   const [tab, setTab] = useState("ALL"); // ALL | SCHEDULED | SENT | FAILED
 
   const [rescheduleId, setRescheduleId] = useState(null);
@@ -102,7 +101,6 @@ export default function NotificationHistory() {
           </div>
 
           <div className="nav-links">
-            {/* NEW: Home tab */}
             <NavLink to="/admin/notifications" end className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}>
               <HomeIcon className="i sm" /><span className="nav-link-text">Home</span>
             </NavLink>
@@ -137,7 +135,6 @@ export default function NotificationHistory() {
               <RefreshCw size={16} className={loading ? "spin" : ""} /> Refresh
             </button>
 
-            {/* NEW pill search bar */}
             <div className="nh__search searchbar">
               <div className="searchbar-inner">
                 <Search size={18} className="searchbar-icon" aria-hidden="true" />
@@ -150,7 +147,6 @@ export default function NotificationHistory() {
                 />
               </div>
 
-              {/* NEW status chips beside the search */}
               <div className="seg">
                 <button
                   type="button"

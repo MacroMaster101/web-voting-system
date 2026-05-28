@@ -138,7 +138,7 @@ export default function Students({ onLogout }) {
 
   const errorShownRef = useRef(false);
 
-  async function load() {
+  const load = useCallback(async () => {
     setLoading(true);
     try {
       const rows = await getStudents();
@@ -154,11 +154,11 @@ export default function Students({ onLogout }) {
     } finally {
       setLoading(false);
     }
-  }
+  }, [show]);
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { load(); }, [load]);
 
-  // one-shot welcome (same as Admin)
+  // One-shot welcome toast.
   useEffect(() => {
     if (sessionStorage.getItem("students_toast") === "1") {
       show("Student module ready.", "success");

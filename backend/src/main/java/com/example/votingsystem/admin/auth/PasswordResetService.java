@@ -66,7 +66,7 @@ public class PasswordResetService {
                     Your password reset code is: %s
                     This code will expire in 10 minutes.
 
-                    — University Voting System
+                    — Bright Future
                     """.formatted(
                     student.getFullName() != null ? student.getFullName() : "Student",
                     pr.getCode()

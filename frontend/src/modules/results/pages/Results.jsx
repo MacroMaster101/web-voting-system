@@ -6,14 +6,14 @@ import "./Results.css";
 /* ------------ Tiny Toasts ------------ */
 function useToasts() {
   const [toasts, setToasts] = useState([]);
-  const push = (message, type = "info") => {
+  const dismiss = useCallback((id) => setToasts((t) => t.filter((x) => x.id !== id)), []);
+  const push = useCallback((message, type = "info") => {
     const id = Math.random().toString(36).slice(2);
     setToasts((t) => [...t, { id, message, type }]);
     // auto-dismiss
     setTimeout(() => dismiss(id), 3200);
-  };
-  const dismiss = (id) => setToasts((t) => t.filter((x) => x.id !== id));
-  const Stack = () => (
+  }, [dismiss]);
+  const Stack = useCallback(() => (
     <div className="toast-stack">
       {toasts.map((t) => (
         <div key={t.id} className={`toast toast--${t.type}`} onClick={() => dismiss(t.id)}>
@@ -21,7 +21,7 @@ function useToasts() {
         </div>
       ))}
     </div>
-  );
+  ), [dismiss, toasts]);
   return { push, Stack };
 }
 
@@ -111,7 +111,7 @@ export default function Results() {
   const isValid = Object.keys(errors).length === 0;
 
   const navigate = useNavigate();
-  const toast = useToasts();
+  const { push: pushToast, Stack: ToastStack } = useToasts();
 
   // Add smooth scrolling behavior
   useEffect(() => {
@@ -139,12 +139,12 @@ export default function Results() {
         setEvents(Array.isArray(evs) ? evs : []);
       } catch (err) {
         console.error("Failed to load events:", err);
-        toast.push("Failed to load events.", "error");
+        pushToast("Failed to load events.", "error");
       } finally {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [pushToast]);
 
   // load sets for selected event
   useEffect(() => {
@@ -155,10 +155,10 @@ export default function Results() {
         setSets(Array.isArray(resultSets) ? resultSets : []);
       } catch (err) {
         console.error("Failed to load result sets:", err);
-        toast.push("Failed to load result sets.", "error");
+        pushToast("Failed to load result sets.", "error");
       }
     })();
-  }, [eventId]);
+  }, [eventId, pushToast]);
 
   const selectedEvent = useMemo(
     () => events.find((e) => String(e.id) === String(eventId)),
@@ -169,7 +169,7 @@ export default function Results() {
     e.preventDefault();
     setTouched({ eventId: true, title: true });
     if (!isValid) {
-      toast.push("Please fix the form errors and try again.", "error");
+      pushToast("Please fix the form errors and try again.", "error");
       return;
     }
     setCreating(true);
@@ -186,12 +186,12 @@ export default function Results() {
       setNotes("");
       setSets(await listResultSets(eventId));
 
-      toast.push("Result set created successfully.", "success");
+      pushToast("Result set created successfully.", "success");
       navigate(`/admin/results/set/${rs.id}`);
     } catch (err) {
       console.error("Failed to create result set:", err);
       const msg = err?.response?.data?.message || "Failed to create result set. Please try again.";
-      toast.push(msg, "error");
+      pushToast(msg, "error");
     } finally {
       setCreating(false);
     }
@@ -215,7 +215,7 @@ export default function Results() {
   return (
     <div className="results-page">
       {/* Toasts */}
-      <toast.Stack />
+      <ToastStack />
 
       <div className="bg-gradient"></div>
 

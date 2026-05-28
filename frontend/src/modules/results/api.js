@@ -45,8 +45,7 @@ export const getLeaders = async (categoryId, limit=3) =>
 export const getTrend = async (hours=24) =>
   (await api.get(`/api/dashboard/trend`, { params: { hours } })).data;
 
-// Ensure you already have an axios instance named `api` exported from this file.
-// Below are the report helpers used by Analytics.jsx:
+// Report helpers used by Analytics.jsx.
 
 export const getAllEvents   = async () =>
   (await api.get("/api/admin/reports/events")).data;

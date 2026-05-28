@@ -158,7 +158,7 @@ export default function NomineeManager() {
   }, []);
 
   /* Loaders */
-  const loadEvents = async () => {
+  const loadEvents = useCallback(async () => {
     try {
       const res = await getEvents();
       setEvents(Array.isArray(res?.data) ? res.data : res || []);
@@ -166,8 +166,8 @@ export default function NomineeManager() {
       setErr("Failed to load events.");
       show("Failed to load events.", "error");
     }
-  };
-  const loadCategoriesForEvent = async (eid) => {
+  }, [show]);
+  const loadCategoriesForEvent = useCallback(async (eid) => {
     try {
       if (!eid) { setCategories([]); return; }
       const res = await getCategoriesByEvent(eid);
@@ -176,8 +176,8 @@ export default function NomineeManager() {
       setErr("Failed to load categories.");
       show("Failed to load categories.", "error");
     }
-  };
-  const loadNomineesAll = async () => {
+  }, [show]);
+  const loadNomineesAll = useCallback(async () => {
     try {
       const { data } = await getNominees();
       setNominees(data);
@@ -185,8 +185,8 @@ export default function NomineeManager() {
       setErr("Failed to load nominees.");
       show("Failed to load nominees.", "error");
     }
-  };
-  const loadNomineesForCategory = async (categoryId) => {
+  }, [show]);
+  const loadNomineesForCategory = useCallback(async (categoryId) => {
     try {
       const { data } = await getNomineesByCategory(categoryId);
       setNominees(data);
@@ -194,8 +194,8 @@ export default function NomineeManager() {
       setErr("Failed to load nominees.");
       show("Failed to load nominees.", "error");
     }
-  };
-  const loadNomineesForEvent = async (eid) => {
+  }, [show]);
+  const loadNomineesForEvent = useCallback(async (eid) => {
     try {
       const { data: cats } = await getCategoriesByEvent(eid);
       if (!cats?.length) return setNominees([]);
@@ -207,12 +207,12 @@ export default function NomineeManager() {
       setErr("Failed to load nominees.");
       show("Failed to load nominees.", "error");
     }
-  };
+  }, [show]);
 
   useEffect(() => {
     loadEvents();
     loadNomineesAll();
-  }, []);
+  }, [loadEvents, loadNomineesAll]);
 
   /* Top event filter behavior */
   useEffect(() => {

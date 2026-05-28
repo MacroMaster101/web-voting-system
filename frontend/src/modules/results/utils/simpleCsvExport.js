@@ -7,12 +7,12 @@ export function exportEventReportToCSV(r) {
   try {
     const L = [];
     
-    // Header Section
+    // Header
     L.push("EVENT RESULTS REPORT");
-    L.push(`Generated: ${new Date().toLocaleString()}`);
+    L.push(`Created: ${new Date().toLocaleString()}`);
     L.push("");
     
-    // Event Details Section
+    // Event details
     L.push("=== EVENT DETAILS ===");
     L.push("Field,Value");
     L.push(`Event ID,${r.eventId}`);
@@ -22,7 +22,7 @@ export function exportEventReportToCSV(r) {
     L.push(`End Date,${new Date(r.endDate).toLocaleDateString()}`);
     L.push("");
     
-    // Key Metrics Section
+    // Key metrics
     L.push("=== KEY METRICS ===");
     L.push("Metric,Value");
     L.push(`Total Votes,${r.totalVotes || 0}`);
@@ -30,7 +30,7 @@ export function exportEventReportToCSV(r) {
     L.push(`Total Categories,${r.categories?.length || 0}`);
     L.push("");
     
-    // Categories Section
+    // Categories
     if (Array.isArray(r.categories) && r.categories.length > 0) {
       L.push("=== CATEGORIES ===");
       L.push("Category ID,Category Name");
@@ -40,7 +40,7 @@ export function exportEventReportToCSV(r) {
       L.push("");
     }
     
-    // Winners Section
+    // Winners
     L.push("=== WINNERS ===");
     L.push("Category,Winner,Votes,Category ID");
     if (r.winners && r.winners.length > 0) {
@@ -52,7 +52,7 @@ export function exportEventReportToCSV(r) {
     }
     L.push("");
     
-    // Category Vote Counts Section
+    // Category vote counts
     L.push("=== CATEGORY VOTE COUNTS ===");
     L.push("Category,Total Votes,Category ID");
     if (r.categoryVoteCounts && r.categoryVoteCounts.length > 0) {
@@ -66,7 +66,7 @@ export function exportEventReportToCSV(r) {
     }
     L.push("");
     
-    // Detailed Vote Breakdown Section
+    // Detailed vote breakdown
     if (Array.isArray(r.nomineeVotesByCategory) && r.nomineeVotesByCategory.length > 0) {
       L.push("=== DETAILED VOTE BREAKDOWN ===");
       r.nomineeVotesByCategory.forEach(cat => {
@@ -82,7 +82,7 @@ export function exportEventReportToCSV(r) {
       L.push("");
     }
     
-    // Top Nominees Section
+    // Top nominees
     if (r.topNominees && r.topNominees.length > 0) {
       L.push("=== TOP 10 NOMINEES ===");
       L.push("Rank,Nominee Name,Total Votes,Nominee ID");
@@ -92,7 +92,7 @@ export function exportEventReportToCSV(r) {
       L.push("");
     }
     
-    // All Nominees Section (if available)
+    // All nominees
     if (Array.isArray(r.nominees) && r.nominees.length > 0) {
       L.push("=== ALL NOMINEES ===");
       L.push("Nominee ID,Nominee Name,Category,Category ID");
@@ -102,7 +102,7 @@ export function exportEventReportToCSV(r) {
       L.push("");
     }
     
-    // Daily Vote Timeline Section
+    // Daily vote timeline
     if (Array.isArray(r.dailyVoteCounts) && r.dailyVoteCounts.length > 0) {
       L.push("=== DAILY VOTE TIMELINE ===");
       L.push("Date,Votes");
@@ -113,18 +113,18 @@ export function exportEventReportToCSV(r) {
       L.push("");
     }
     
-    // Summary Footer
+    // Summary
     L.push("=== REPORT SUMMARY ===");
-    L.push(`Report Generated,${new Date().toLocaleString()}`);
+    L.push(`Report Created,${new Date().toLocaleString()}`);
     L.push(`Event ID,${r.eventId}`);
     L.push(`Total Votes Collected,${r.totalVotes || 0}`);
     
-    // Create and download the CSV file
+    // Download the CSV file.
     const blob = new Blob([L.join("\n")], { type: "text/csv;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     
-    // Create clean filename
+    // Clean filename
     const eventName = r.eventName.replace(/[^a-zA-Z0-9]/g, '_');
     const dateStr = new Date().toISOString().split('T')[0];
     a.href = url;

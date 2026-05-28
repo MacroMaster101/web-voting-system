@@ -50,16 +50,14 @@ export default function VotingHome() {
 
   /* ===== Toasts ===== */
   const [toast, setToast] = useState(null);
-  const showToast = (message, kind = "info", timeout = 3000) => {
-    setToast({ message, kind });
-    window.clearTimeout(showToast._t);
-    showToast._t = window.setTimeout(() => setToast(null), timeout);
-  };
+  const showToast = useCallback((message, kind = "info", timeout = 3000) => {
+    setToast({ message, kind, timeout });
+  }, []);
 
   // auto-dismiss any toast (also covers setToast used below)
   useEffect(() => {
     if (!toast) return;
-    const id = setTimeout(() => setToast(null), 3000);
+    const id = setTimeout(() => setToast(null), toast.timeout ?? 3000);
     return () => clearTimeout(id);
   }, [toast]);
 
@@ -117,7 +115,7 @@ export default function VotingHome() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
 
-  useEffect(() => { if (err) showToast(err, "error", 3600); }, [err]);
+  useEffect(() => { if (err) showToast(err, "error", 3600); }, [err, showToast]);
 
   useEffect(() => {
     (async () => {

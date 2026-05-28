@@ -8,8 +8,8 @@ import NomineeManager from "./pages/NomineeManager.jsx";
 
 export default function App() {
   return (
-    <main className="app-main">
-      <div className="container">
+    <main className="nominee-shell">
+      <div className="nominee-shell__container">
         <Routes>
           <Route index element={<Home />} />
           <Route path="events" element={<EventManager />} />

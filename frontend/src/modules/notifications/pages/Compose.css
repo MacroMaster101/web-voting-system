@@ -192,7 +192,7 @@
 }
 .activity-search-input:focus { border-color: #a9c6ff; box-shadow: 0 0 0 3px rgba(169,198,255,.35); background: #f2f7ff; }
 
-/* NEW: Counters (chips) */
+/* Counter chips */
 .activity-counters{
   display:flex; gap:12px; flex-wrap:wrap;
   margin: 4px 0 12px 0;

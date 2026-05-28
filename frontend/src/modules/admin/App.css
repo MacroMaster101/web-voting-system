@@ -127,6 +127,14 @@
   margin: 0 auto;
 }
 
+.admin-route-fallback {
+  min-height: 320px;
+  display: grid;
+  place-items: center;
+  color: #0f172a;
+  font-weight: 800;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .app-header__container {

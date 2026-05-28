@@ -1,54 +1,50 @@
 <p align="center">
-  <img src="./docs/logo.svg" alt="BrightVote logo" width="720" />
+  <img src="./docs/logo.svg" alt="Bright Future logo" width="720" />
 </p>
 
-<h1 align="center">🗳️ BrightVote</h1>
+<h1 align="center">Bright Future</h1>
 
 <p align="center">
-  <strong>A clean full-stack voting platform for campus awards, nominees, live dashboards, notifications, and published results.</strong>
+  🎓 A full-stack student awards voting platform with events, nominees, dashboards, notifications, and results.
 </p>
 
 <p align="center">
-  <img alt="Spring Boot" src="https://img.shields.io/badge/Spring%20Boot-3.5.4-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" />
-  <img alt="React" src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=0F172A" />
-  <img alt="Vite" src="https://img.shields.io/badge/Vite-7-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
-  <img alt="Java" src="https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" />
+  <strong>Spring Boot API</strong> · <strong>React/Vite UI</strong> · <strong>H2 Local DB</strong>
 </p>
 
-## ✨ What This Project Does
+## ✨ Overview
 
-- 🧑‍🎓 Student registration, login, and protected voting
-- 🏆 Event, category, and nominee management
-- 📊 Admin dashboards with voting progress and analytics
-- 🔔 Notification workflows with SMTP configuration
-- 📄 Results publishing, PDF/CSV/Excel-style reporting
-- 🧹 Clean repo layout with one `backend/`, one `frontend/`, and one `data/` folder
+Bright Future lets students register, sign in, and vote in active campus award events. Admin users can manage events, categories, nominees, students, notifications, dashboards, and published result reports from one connected web app.
 
-## 🗂️ Project Layout
+The project is organized as one Spring Boot backend and one React/Vite frontend, so the modules are easier to run, test, and maintain.
+
+## 🗂 Project Layout
 
 ```text
 .
-|-- backend/        Spring Boot API, security, database, reports, mail
+|-- backend/        Spring Boot API, security, database, reports, and mail
 |-- frontend/       React/Vite app with all UI modules
 |-- data/           Local H2 database files for development
-|-- docs/           Project logo and README assets
+|-- docs/           Logo and README assets
 `-- README.md
 ```
 
-## ⚡ Quick Start
+## 🧰 Requirements
 
-Prerequisites:
+- Java 17
+- Node.js 18 or newer
+- npm
 
-- ☕ Java 17
-- 🟢 Node.js 18+
-- 📦 npm
+## 🚀 Run Locally
 
-Run the backend and frontend in two terminals:
+Start the backend:
 
 ```powershell
 cd backend
 .\mvnw.cmd spring-boot:run
 ```
+
+Start the frontend in a second terminal:
 
 ```powershell
 cd frontend
@@ -56,13 +52,13 @@ npm install
 npm run dev
 ```
 
-Development URLs:
+Local URLs:
 
 | App | URL |
 | --- | --- |
 | 🌐 Frontend | `http://localhost:5173` |
 | 🔌 Backend API | `http://localhost:8080` |
-| 🗄️ H2 console | `http://localhost:8080/h2-console` |
+| 🗄 H2 console | `http://localhost:8080/h2-console` |
 
 ## ✅ Checks
 
@@ -81,13 +77,13 @@ npm run lint
 npm run build
 ```
 
-## 🔐 Environment
+## ⚙️ Environment
 
 Backend configuration lives in `backend/src/main/resources/application.yml`. Use `backend/.env.example` as a reference for local or deployment environment variables.
 
-Frontend configuration can be copied from `frontend/.env.example` when defaults need to change.
+Use `frontend/.env.example` as the reference for frontend configuration.
 
-Important backend variables:
+Common backend variables:
 
 - `SPRING_DATASOURCE_URL`
 - `SPRING_DATASOURCE_USERNAME`
@@ -98,12 +94,12 @@ Important backend variables:
 - `APP_MAIL_FROM_ADDRESS`
 - `APP_MAIL_FROM_NAME`
 
-## 🧼 Keep The Repo Clean
+## 🧼 Repo Hygiene
 
-Do not commit generated folders such as `node_modules/`, `target/`, `frontend/dist/`, or local database files under `data/`.
+Build output, dependencies, secrets, and local data should stay out of Git. That includes `node_modules/`, `target/`, `frontend/dist/`, and H2 database files under `data/`.
 
-Repository hygiene files:
+The repo includes:
 
-- `.gitignore` keeps build output, local databases, IDE files, and secrets out of Git.
-- `.editorconfig` keeps indentation and line endings consistent across editors.
-- `.gitattributes` keeps Maven wrapper scripts with the right line endings.
+- `.gitignore` for build output, local databases, editor files, and secrets
+- `.editorconfig` for editor formatting defaults
+- `.gitattributes` for consistent line endings, including Maven wrapper scripts

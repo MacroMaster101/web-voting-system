@@ -1,4 +1,4 @@
-/* ===== Modern UI-Friendly Campus Voting Landing Page ===== */
+/* Campus voting landing page */
 
 
 
@@ -1025,7 +1025,7 @@ button:focus-visible {
   }
 }
 
-/* ===== Enhanced Glass Morphism Support ===== */
+/* Glass surface fallback */
 @supports not (backdrop-filter: blur(20px)) {
   .landing__nav {
     background: rgba(255, 255, 255, 0.95);

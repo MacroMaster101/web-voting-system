@@ -206,7 +206,7 @@ export default function EventVote() {
 
   const event = bundle?.event || null;
   const categories = bundle?.categories || [];
-  const nomineesFlat = bundle?.nominees || [];
+  const nomineesFlat = bundle?.nominees;
   const nomineesByCategoryFromMap = bundle?.nomineesByCategory || null;
 
   // tolerate nominees[] or nomineesByCategory{}
@@ -217,7 +217,7 @@ export default function EventVote() {
         m.set(Number(k), list || []);
       }
     } else {
-      for (const n of nomineesFlat) {
+      for (const n of nomineesFlat || []) {
         const k = n.categoryId ?? n.category?.id;
         if (!k) continue;
         (m.get(k) || m.set(k, []).get(k)).push(n);
@@ -325,42 +325,14 @@ export default function EventVote() {
 
           <div className="vh__actions">
             {ALLOW_EDIT && (
-              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                <span style={{ 
-                  fontSize: '0.8rem', 
-                  fontWeight: 600, 
-                  color: '#ef4444',
-                  background: 'rgba(239, 68, 68, 0.1)',
-                  padding: '4px 8px',
-                  borderRadius: '6px'
-                }}>
+              <div className="event-vote__edit-controls">
+                <span className="event-vote__edit-pill">
                   Edit Mode
                 </span>
                 <button 
                   type="button" 
                   onClick={cancelEdit}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '8px 16px',
-                    background: 'rgba(107, 114, 128, 0.1)',
-                    color: '#6b7280',
-                    border: '1px solid rgba(107, 114, 128, 0.2)',
-                    borderRadius: '8px',
-                    fontWeight: 600,
-                    fontSize: '0.8rem',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(107, 114, 128, 0.2)';
-                    e.currentTarget.style.transform = 'translateY(-1px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(107, 114, 128, 0.1)';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }}
+                  className="event-vote__cancel-edit"
                 >
                   <IconClose />
                   Cancel
@@ -380,23 +352,11 @@ export default function EventVote() {
       <main className="public-event__main">
         {/* Edit mode banner */}
         {ALLOW_EDIT && (
-          <div style={{
-            background: 'linear-gradient(135deg, #fef3c7, #fde68a)',
-            border: '1px solid #f59e0b',
-            borderRadius: '12px',
-            padding: '16px 20px',
-            marginBottom: '20px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            boxShadow: '0 4px 12px rgba(245, 158, 11, 0.15)'
-          }}>
-            <IconEdit style={{ color: '#d97706', flexShrink: 0 }} />
-            <div style={{ flex: 1 }}>
-              <strong style={{ color: '#92400e', fontSize: '0.95rem' }}>
-                Edit Mode Active
-              </strong>
-              <p style={{ margin: '4px 0 0 0', color: '#92400e', fontSize: '0.85rem', opacity: 0.9 }}>
+          <div className="edit-mode-banner">
+            <IconEdit className="edit-mode-banner__icon" />
+            <div className="edit-mode-banner__content">
+              <strong className="edit-mode-banner__title">Edit Mode Active</strong>
+              <p className="edit-mode-banner__description">
                 You can change your previous votes. Click "Cancel" to exit edit mode.
               </p>
             </div>
@@ -433,7 +393,7 @@ export default function EventVote() {
         )}
 
         {/* Navigation */}
-        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <div className="public-event__nav">
           <Link to="/voting" className="public-event__back-link">
             <IconArrowLeft />
             Back to Events

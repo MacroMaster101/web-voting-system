@@ -1,5 +1,5 @@
 import React from "react";
-import "./ChartArea.css"; // ⬅️ NEW
+import "./ChartArea.css";
 import {
   ResponsiveContainer,
   BarChart, Bar,

@@ -12,7 +12,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Optional<Student> findByIndexNo(String indexNo);
     Optional<Student> findByEmail(String email);
 
-    // ---- NEW: lightweight read-only projection for the list view
+    // Lightweight read-only projection for the student list.
     interface Row {
         Long getId();
         String getIndexNo();
@@ -21,7 +21,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
         boolean isActive();
     }
 
-    // ---- NEW: fetch only safe columns (no passwordHash, no dates)
+    // Fetch only safe columns for list screens.
     List<Row> findAllByOrderByIdDesc();
 
     boolean existsByEmailIgnoreCase(String email);

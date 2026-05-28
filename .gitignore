@@ -1,8 +1,6 @@
-# ──────────────────────────────────────────────
-# BrightVote — .gitignore
-# ──────────────────────────────────────────────
+# Bright Future .gitignore
 
-# ── Environment and local secrets ─────────────
+# Environment and local secrets
 .env
 .env.*
 **/.env
@@ -11,7 +9,7 @@
 application-local.yml
 application-*.local.yml
 
-# ── Java / Maven / Spring ─────────────────────
+# Java, Maven, and Spring
 target/
 **/target/
 *.class
@@ -26,7 +24,7 @@ replay_pid*
 **/.mvn/wrapper/maven-wrapper.jar
 HELP.md
 
-# ── Node / Vite / npm ─────────────────────────
+# Node, Vite, and npm
 node_modules/
 **/node_modules/
 dist/
@@ -40,24 +38,24 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# ── Local H2 database files ──────────────────
+# Local H2 database files
 data/*.db
 data/*.mv.db
 data/*.trace.db
 data/*.lock.db
 
-# ── Backups and temporary files ───────────────
+# Backups and temporary files
 backups/
 *.bak
 *.tmp
 *.temp
 
-# ── OS files ──────────────────────────────────
+# OS files
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# ── IDEs and editors ─────────────────────────
+# IDEs and editors
 .vscode/
 .idea/
 *.iws
@@ -73,7 +71,13 @@ desktop.ini
 .springBeans
 .sts4-cache
 
-# ── NetBeans ──────────────────────────────────
+# GitHub and modernization scratch files
+# Keep real GitHub config commit-able, but ignore modernization scratch work.
+!.github/
+!.github/**
+/.github/modernize/
+
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /nbdist/
@@ -82,7 +86,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-# ── Old project directories (deprecated) ─────
+# Old project directories
 # These old folders were from the pre-refactor multi-app layout.
 # Block them so they are never accidentally re-added.
 /Nominee-frontend/

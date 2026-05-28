@@ -452,7 +452,7 @@ html { scroll-behavior: smooth; }
   box-shadow: 0 10px 22px rgba(59,130,246,.35);
 }
 
-/* --- OPAQUE STICKY NAV + NON-STICKY PAGE HEADERS (global fix) --- */
+/* Sticky nav and page headers */
 .top-nav{
   position: sticky;
   top: 12px;

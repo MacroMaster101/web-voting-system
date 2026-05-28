@@ -11,7 +11,7 @@ export const exportSimpleEventReportToPDF = (reportData) => {
   try {
     const doc = new jsPDF();
     
-    // Modern color palette
+    // Report colors
     const colors = {
       primaryDark: [30, 58, 138],      // Deep blue
       primaryLight: [59, 130, 246],    // Bright blue
@@ -41,7 +41,7 @@ export const exportSimpleEventReportToPDF = (reportData) => {
       }
     };
 
-    // HERO HEADER with gradient effect
+    // Header band
     doc.setFillColor(...colors.primaryDark);
     doc.rect(0, 0, pageWidth, 60, 'F');
     
@@ -62,11 +62,11 @@ export const exportSimpleEventReportToPDF = (reportData) => {
     
     doc.setFontSize(9);
     doc.setTextColor(180, 180, 220);
-    doc.text(`Generated: ${new Date().toLocaleString()}`, pageWidth / 2, 48, { align: 'center' });
+    doc.text(`Created: ${new Date().toLocaleString()}`, pageWidth / 2, 48, { align: 'center' });
     
     y = 75;
 
-    // Helper function for section headers
+    // Section headers
     const drawSectionHeader = (title) => {
       ensurePage(20);
       
@@ -82,7 +82,7 @@ export const exportSimpleEventReportToPDF = (reportData) => {
       y += 12;
     };
 
-    // Helper for info cards
+    // Info cards
     const drawInfoCard = (label, value, color = colors.primaryLight) => {
       ensurePage();
       
@@ -105,12 +105,12 @@ export const exportSimpleEventReportToPDF = (reportData) => {
       y += 12;
     };
 
-    // EVENT OVERVIEW
+    // Event overview
     drawSectionHeader('EVENT OVERVIEW');
     
     y += 5;
     
-    // Event name highlight box
+    // Event name highlight
     doc.setFillColor(243, 244, 246);
     doc.roundedRect(margin, y - 6, contentWidth, 18, 3, 3, 'F');
     
@@ -146,7 +146,7 @@ export const exportSimpleEventReportToPDF = (reportData) => {
     
     y += 8;
 
-    // KEY METRICS - Cards in grid
+    // Key metrics
     drawSectionHeader('KEY METRICS');
     
     y += 5;
@@ -187,7 +187,7 @@ export const exportSimpleEventReportToPDF = (reportData) => {
     
     y += 30;
 
-    // CATEGORIES
+    // Categories
     if (Array.isArray(reportData.categories) && reportData.categories.length > 0) {
       drawSectionHeader('CATEGORIES');
       y += 5;
@@ -228,7 +228,7 @@ export const exportSimpleEventReportToPDF = (reportData) => {
       y += 8;
     }
 
-    // WINNERS - Premium cards
+    // Winners
     if (reportData.winners && reportData.winners.length > 0) {
       drawSectionHeader('WINNERS');
       y += 5;
@@ -236,7 +236,7 @@ export const exportSimpleEventReportToPDF = (reportData) => {
       reportData.winners.forEach((winner, idx) => {
         ensurePage(24);
         
-        // Winner card with shadow effect
+        // Winner card
         doc.setFillColor(...colors.white);
         doc.roundedRect(margin, y, contentWidth, 20, 3, 3, 'F');
         
@@ -289,7 +289,7 @@ export const exportSimpleEventReportToPDF = (reportData) => {
       y += 8;
     }
 
-    // CATEGORY VOTE COUNTS with bars
+    // Category vote counts
     if (Array.isArray(reportData.categoryVoteCounts) && reportData.categoryVoteCounts.length > 0) {
       drawSectionHeader('CATEGORY VOTE DISTRIBUTION');
       y += 5;
@@ -329,7 +329,7 @@ export const exportSimpleEventReportToPDF = (reportData) => {
       y += 8;
     }
 
-    // DETAILED BREAKDOWN
+    // Detailed vote breakdown
     if (Array.isArray(reportData.nomineeVotesByCategory) && reportData.nomineeVotesByCategory.length > 0) {
       drawSectionHeader('DETAILED VOTE BREAKDOWN');
       y += 5;
@@ -368,7 +368,7 @@ export const exportSimpleEventReportToPDF = (reportData) => {
       y += 5;
     }
 
-    // TOP NOMINEES - Podium style
+    // Top nominees
     if (reportData.topNominees && reportData.topNominees.length > 0) {
       drawSectionHeader('TOP 10 NOMINEES');
       y += 5;
@@ -409,7 +409,7 @@ export const exportSimpleEventReportToPDF = (reportData) => {
       y += 8;
     }
 
-    // DAILY TIMELINE with enhanced visualization
+    // Daily vote timeline
     if (Array.isArray(reportData.dailyVoteCounts) && reportData.dailyVoteCounts.length > 0) {
       drawSectionHeader('DAILY VOTE TIMELINE');
       y += 5;

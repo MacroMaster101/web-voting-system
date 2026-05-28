@@ -173,7 +173,7 @@ html,body{
 /* ===========================
    Event Cards — CLEAN WHITE
 =========================== */
-/* Kill any older glass/gradient/strip rules that might be lingering */
+/* Keep event cards on the solid card treatment. */
 .cards-grid .event-card::before,
 .cards-grid .event-card::after{ content:none !important; }
 .cards-grid .event-card{
@@ -190,7 +190,7 @@ html,body{
   box-shadow: var(--card-shadow-hover) !important;
   border-color: #dde6f1 !important;
 }
-.event-status-bar{ display:none !important; } /* extra safety */
+.event-status-bar{ display:none !important; }
 
 .event-content{ padding:24px; }
 .event-header{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:12px; }
@@ -223,7 +223,7 @@ html,body{
 .cards-grid .event-card .event-stat svg{ width:20px; height:20px; color: var(--primary-1) !important; }
 .cards-grid .event-card .event-stat p{ margin:0; }
 
-/* Button — UPDATED to match "Get Started" */
+/* Event card button */
 .cards-grid .event-card .event-btn{
   position: relative;
   overflow: hidden;

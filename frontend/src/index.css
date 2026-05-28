@@ -1,4 +1,4 @@
-/* ===== BrightVote — Global Reset ===== */
+/* ===== Bright Future — Global Reset ===== */
 /* Single source of truth for base styles. Module-level CSS should
    NOT override body, :root, html, or #root — use scoped wrapper
    classes instead (e.g. .app, .voting-page, .results-page). */
@@ -55,4 +55,14 @@ select,
 textarea {
   font: inherit;
   color: inherit;
+}
+
+.route-fallback {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: #0f172a;
+  font-weight: 800;
+  background: linear-gradient(135deg, #2aa3f4 0%, #a0d5ff 35%, #b2e0c4 100%);
 }

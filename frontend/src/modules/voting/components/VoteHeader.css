@@ -351,7 +351,7 @@
   }
 }
 
-/* Enhanced support for browsers without backdrop-filter */
+/* Backdrop-filter fallback */
 @supports not (backdrop-filter: blur(20px)) {
   .vote-header {
     background: rgba(255, 255, 255, 0.98);

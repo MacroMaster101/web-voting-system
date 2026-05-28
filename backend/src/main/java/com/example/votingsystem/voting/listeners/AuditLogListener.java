@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class AuditLogListener {
     private static final Logger log = LoggerFactory.getLogger(AuditLogListener.class);
     private static final ZoneId APP_ZONE = ZoneId.of("Asia/Colombo");
-    // Example: 2025-10-16T11:50:25.243+0530  (note: no colon in zone, like your image)
+    // Example: 2025-10-16T11:50:25.243+0530
     private static final DateTimeFormatter FMT =
             DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 

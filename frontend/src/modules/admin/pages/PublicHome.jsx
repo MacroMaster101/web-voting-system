@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getEvents, getCategories, getNominees, api } from "../api.js";
 import "./PublicHome.css";
 
-/* Modern SVG Icons */
+/* Icons */
 const Star = (p) => (
   <svg viewBox="0 0 24 24" width="32" height="32" {...p}>
     <path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -68,7 +68,7 @@ export default function PublicHome() {
   const [navHidden, setNavHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  /* ---- Scroll Header Effect ---- */
+  /* Scroll header */
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -105,10 +105,9 @@ export default function PublicHome() {
     })();
   }, []);
 
-  const now = new Date();
-
-  // attach counts + active state to each event
+  // Add counts and schedule state to each event.
   const withStats = useMemo(() => {
+    const now = new Date();
     const catsByEvent = new Map();
     categories.forEach((c) => {
       const arr = catsByEvent.get(c.eventId) || [];
@@ -150,7 +149,6 @@ export default function PublicHome() {
 
   return (
     <div className="public-home">
-      {/* Scroll Header Navigation */}
       <nav className={`ph-nav ${navScrolled ? 'scrolled' : ''} ${navHidden ? 'hidden' : ''}`}>
         <div className="ph-nav-container">
           <div className="ph-nav-inner">
@@ -158,7 +156,7 @@ export default function PublicHome() {
               <div className="ph-brand-icon">
                 <VoteIcon />
               </div>
-              <span className="ph-brand-text">Campus Voting</span>
+              <span className="ph-brand-text">Bright Future</span>
             </Link>
 
             <div className="ph-nav-actions">
@@ -174,7 +172,6 @@ export default function PublicHome() {
       </nav>
 
       <main className="public-home__main">
-        {/* HERO SECTION */}
         <section className="ph-hero">
           <div className="ph-hero-badge"><Star /></div>
           <h1 className="ph-hero-title">Student Awards Portal</h1>
@@ -183,7 +180,6 @@ export default function PublicHome() {
           </p>
         </section>
 
-        {/* SEARCH SECTION */}
         <section className="ph-search-tray">
           <div className="ph-search-left">
             <SearchIcon className="ph-search-icon" />
@@ -200,7 +196,6 @@ export default function PublicHome() {
           </div>
         </section>
 
-        {/* EVENTS GRID - 3 CARDS PER ROW */}
         {loading && (
           <div className="public-home__loading">
             <div className="public-home__spinner" />

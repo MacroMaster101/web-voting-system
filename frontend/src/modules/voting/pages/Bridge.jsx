@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./Bridge.css";
 
 export default function Bridge() {
   const navigate = useNavigate();
@@ -53,9 +54,12 @@ export default function Bridge() {
   }, [qs, navigate]);
 
   return (
-    <div className="container">
-      <h2>Signing you in…</h2>
-      <p className="muted">Transferring session from admin login.</p>
+    <div className="bridge-page">
+      <section className="bridge-card" role="status" aria-live="polite">
+        <div className="bridge-card__spinner" />
+        <h2>Signing you in...</h2>
+        <p>Transferring session from admin login.</p>
+      </section>
     </div>
   );
 }

@@ -52,7 +52,7 @@ export default function Compose() {
     };
   };
 
-  /** NEW: Sort strictly by createdAt, then sentAt, then scheduled time (newest first). */
+  /** Sort by the most reliable timestamp first. */
   const getTs = (n) => {
     if (n.createdAt) return Date.parse(n.createdAt);
     if (n.sentAt)    return Date.parse(n.sentAt);
@@ -162,7 +162,7 @@ export default function Compose() {
           ? await sendNow({ recipients: recipient, subject, body })
           : await scheduleSend({ recipients: recipient, subject, body, localDateTime: scheduledTime });
 
-      /** NEW: handle single-object responses too */
+      /** The API can return either one notification or an array. */
       const arr = Array.isArray(res) ? res : [res].filter(Boolean);
       const sent = arr.filter((x) => String(x.status || "").toUpperCase() === "SENT").length;
       const total = arr.length || 0;
@@ -218,12 +218,10 @@ export default function Compose() {
           </div>
 
           <div className="nav-links">
-            {/* NEW: Home tab (index route) */}
             <NavLink to="/admin/notifications" end className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}>
               <HomeIcon className="i sm" /><span className="nav-link-text">Home</span>
             </NavLink>
 
-            {/* Compose moved to /compose */}
             <NavLink to="/admin/notifications/compose" className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}>
               <Send className="i sm" /><span className="nav-link-text">Compose</span>
             </NavLink>

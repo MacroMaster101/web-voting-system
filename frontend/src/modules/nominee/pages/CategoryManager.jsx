@@ -179,7 +179,7 @@ export default function CategoryManager() {
   };
 
   /* Loaders */
-  const loadEvents = async () => {
+  const loadEvents = useCallback(async () => {
     try {
       const res = await getEvents();
       const raw = Array.isArray(res?.data) ? res.data : res || [];
@@ -196,9 +196,9 @@ export default function CategoryManager() {
       setErr("Failed to load events.");
       show("Failed to load events.", "error");
     }
-  };
+  }, [show]);
 
-  const loadCategories = async (eventId = "") => {
+  const loadCategories = useCallback(async (eventId = "") => {
     try {
       const res = eventId ? await getCategoriesByEvent(eventId) : await getCategories();
       setCategories(Array.isArray(res?.data) ? res.data : res || []);
@@ -207,17 +207,17 @@ export default function CategoryManager() {
       setErr("Failed to load categories.");
       show("Failed to load categories.", "error");
     }
-  };
+  }, [show]);
 
   useEffect(() => {
     loadEvents();
     loadCategories();
-  }, []);
+  }, [loadEvents, loadCategories]);
 
   useEffect(() => {
     loadCategories(filterEventId);
     setForm((f) => ({ ...f, eventId: filterEventId || "" }));
-  }, [filterEventId]);
+  }, [filterEventId, loadCategories]);
 
   const selectedEvent = useMemo(
     () => events.find((e) => String(e.id) === String(form.eventId || filterEventId)),
@@ -375,10 +375,10 @@ export default function CategoryManager() {
   };
 
   /* Helpers */
-  const eventName = (id) => {
+  const eventName = useCallback((id) => {
     const row = events.find((e) => String(e.id) === String(id));
     return row?.name ?? "Unknown Event";
-  };
+  }, [events]);
 
   // First apply the event filter
   const filteredByEvent = useMemo(() => {
@@ -398,7 +398,7 @@ export default function CategoryManager() {
       const matchesStatus = catStatus === "all" || status === catStatus;
       return matchesQ && matchesStatus;
     });
-  }, [filteredByEvent, catQuery, catStatus]);
+  }, [filteredByEvent, catQuery, catStatus, eventName]);
 
   // Date change handlers (clamp)
   const onStartChange = (value) => {
